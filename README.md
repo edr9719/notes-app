@@ -1,16 +1,75 @@
-# React + Vite
+# Notes App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React note-taking application built with Vite and styled with Tailwind CSS. Create, organize, and manage your notes with categories and priority levels.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ✅ Create and manage notes
+- 📝 Rich text descriptions
+- 🏷️ Categorize notes (Work, Personal, Ideas)
+- 🎯 Set priority levels (High, Medium, Low)
+- 🎨 Clean, modern UI with Tailwind CSS
+- ⚡ Fast development with Vite
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19** - UI library
+- **Vite** - Build tool and dev server
+- **Tailwind CSS 4** - Utility-first CSS framework
+- **ESLint** - Code linting
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Node.js (version 16 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone <your-repo-url>
+cd notes-app
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Start the development server:
+
+```bash
+npm run dev
+```
+
+4. Open your browser and visit `http://localhost:5173`
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+
+## Project Structure
+
+```
+src/
+├── components/
+│   └── NoteForm.jsx    # Note creation form
+├── App.jsx             # Main application component
+├── main.jsx           # Application entry point
+└── index.css          # Global styles and Tailwind imports
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run the linter: `npm run lint`
+5. Submit a pull request
