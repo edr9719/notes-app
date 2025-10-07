@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const NoteForm = () => {
+const NoteForm = ({ notes, setNotes }) => {
   const [formData, setFormData] = useState({
     title: '',
     category: 'Work',
@@ -10,16 +10,32 @@ const NoteForm = () => {
 
   const handleChange = (e) => {
     setFormData({
-      title: formData.title,
-      category: formData.category,
-      priority: formData.priority,
-      description: formData.description,
+      ...formData,
       [e.target.name]: e.target.value, // This overwrites whichever field changed
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.title || !formData.description) return;
+
+    //Create Note Object
+    const newNote = { id: Date.now(), ...formData };
+
+    //Add Notes to State
+    setNotes([newNote, ...notes]);
+
+    //Reset Form Data
+    setFormData({
+      title: '',
+      category: 'Work',
+      priority: 'Medium',
+      description: '',
+    });
+  };
+
   return (
-    <form className='mb-6'>
+    <form className='mb-6' onSubmit={handleSubmit}>
       <div className='mb-4'>
         <label htmlFor='title' className='block font-semibold'>
           Title
@@ -27,7 +43,7 @@ const NoteForm = () => {
         <input
           name='title'
           type='text'
-          className='w-full p-2 border rounded-lg'
+          className='w-full p-2 border border-purple-500 rounded-full'
           onChange={handleChange}
           value={formData.title}
         />
@@ -39,7 +55,7 @@ const NoteForm = () => {
         <select
           name='priority'
           type='text'
-          className='w-full p-2 border rounded-lg'
+          className='w-full p-2 border border-purple-500 rounded-full'
           onChange={handleChange}
           value={formData.priority}
         >
@@ -55,7 +71,7 @@ const NoteForm = () => {
         </label>
         <select
           type='text'
-          className='w-full p-2 border rounded-lg'
+          className='w-full p-2 border border-purple-500 rounded-full'
           onChange={handleChange}
           value={formData.category}
           name='category'
@@ -73,7 +89,7 @@ const NoteForm = () => {
         <textarea
           name='description'
           type='text'
-          className='w-full p-2 border rounded-lg'
+          className='w-full p-2 border border-purple-500 rounded-lg'
           onChange={handleChange}
           value={formData.description}
         />
