@@ -32,6 +32,7 @@ const NoteForm = ({ notes, setNotes }) => {
       priority: 'Medium',
       description: '',
     });
+    console.log(notes);
   };
 
   return (
@@ -94,7 +95,14 @@ const NoteForm = ({ notes, setNotes }) => {
           value={formData.description}
         />
       </div>
-      <button className='w-full bg-purple-400 text-white py-2 rounded-lg cursor-pointer hover:bg-purple-500'>
+      <button
+        className={`w-full py-2 rounded-full ${
+          !formData.description || !formData.title
+            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            : 'bg-purple-400 text-white hover:bg-purple-500 cursor-pointer'
+        }`}
+        disabled={!formData.description || !formData.title}
+      >
         Add Note
       </button>
     </form>
