@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import TextInput from './inputs/TextInput';
+import SelectInput from './inputs/SelectInput';
+import AreaText from './inputs/AreaText';
 
 const NoteForm = ({ notes, setNotes }) => {
   const [formData, setFormData] = useState({
@@ -7,6 +10,8 @@ const NoteForm = ({ notes, setNotes }) => {
     priority: 'Medium',
     description: '',
   });
+
+  const [isFormVisible, setIsFormVisible] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -36,76 +41,74 @@ const NoteForm = ({ notes, setNotes }) => {
   };
 
   return (
-    <form className='mb-6' onSubmit={handleSubmit}>
-      <div className='mb-4'>
-        <label htmlFor='title' className='block font-semibold'>
-          Title
-        </label>
-        <input
-          name='title'
-          type='text'
-          className='w-full p-2 border border-purple-500 rounded-full'
-          onChange={handleChange}
-          value={formData.title}
-        />
-      </div>
-      <div className='mb-4'>
-        <label htmlFor='priority' className='block font-semibold'>
-          Priority
-        </label>
-        <select
-          name='priority'
-          type='text'
-          className='w-full p-2 border border-purple-500 rounded-full'
-          onChange={handleChange}
-          value={formData.priority}
-        >
-          <option value='High'>🔴 High</option>
-          <option value='Medium'>🟠 Medium</option>7
-          <option value='Low'>🟢 Low</option>
-        </select>
-      </div>
+    <>
+      {/* Toggle Button */}
 
-      <div className='mb-4'>
-        <label htmlFor='category' className='block font-semibold'>
-          Category
-        </label>
-        <select
-          type='text'
-          className='w-full p-2 border border-purple-500 rounded-full'
-          onChange={handleChange}
-          value={formData.category}
-          name='category'
-        >
-          <option value='Work'>🛠️ Work</option>
-          <option value='Personal'>✍🏻 Personal</option>7
-          <option value='Ideas'>🧠 Ideas</option>
-        </select>
-      </div>
-
-      <div className='mb-4'>
-        <label htmlFor='description' className='block font-semibold'>
-          Description
-        </label>
-        <textarea
-          name='description'
-          type='text'
-          className='w-full p-2 border border-purple-500 rounded-lg'
-          onChange={handleChange}
-          value={formData.description}
-        />
-      </div>
       <button
-        className={`w-full py-2 rounded-full ${
-          !formData.description || !formData.title
-            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            : 'bg-purple-400 text-white hover:bg-purple-500 cursor-pointer'
-        }`}
-        disabled={!formData.description || !formData.title}
+        onClick={() => setIsFormVisible(!isFormVisible)}
+        className='w-full p-2 border border-purple-500 rounded-full bg-gray-100  text-purple-800 py-2  cursor-pointer hover:bg-purple-200 hover:border-purple-300 transition mb-4'
       >
-        Add Note
+        {isFormVisible ? 'Hide Form ✖️' : ' Add New Note ➕'}
       </button>
-    </form>
+
+      {/* Form */}
+
+      {isFormVisible && (
+        <form className='mb-6' onSubmit={handleSubmit}>
+          <TextInput
+            name='title'
+            label='Title'
+            onChange={handleChange}
+            value={formData.title}
+            required
+          />
+          <SelectInput
+            name='priority'
+            label='Priority'
+            onChange={handleChange}
+            value={formData.priority}
+            options={[
+              { name: '🔴 High', value: 'High' },
+              { name: '🟠 Medium', value: 'Medium' },
+              { name: '🟢 Low', value: 'Low' },
+            ]}
+            required
+          />
+
+          <SelectInput
+            name='category'
+            label='Category'
+            onChange={handleChange}
+            value={formData.category}
+            required
+            options={[
+              { name: '🛠️ Work', value: 'Work' },
+              { name: '✍🏻 Personal', value: 'Personal' },
+              { name: '🧠 Ideas', value: 'Ideas' },
+            ]}
+          />
+
+          <AreaText
+            name='description'
+            label='Description'
+            onChange={handleChange}
+            value={formData.description}
+            required
+          />
+
+          <button
+            className={`w-full py-2 rounded-full ${
+              !formData.description || !formData.title
+                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                : 'bg-purple-400 text-white hover:bg-purple-500 cursor-pointer'
+            }`}
+            disabled={!formData.description || !formData.title}
+          >
+            Add Note
+          </button>
+        </form>
+      )}
+    </>
   );
 };
 
