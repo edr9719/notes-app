@@ -1,4 +1,16 @@
 const Note = ({ note, deleteNote }) => {
+  const classColors = {
+    border: {
+      Low: 'border-green-500',
+      Medium: 'border-yellow-500',
+      High: 'border-red-500',
+    },
+    text: {
+      Low: 'text-green-500',
+      Medium: 'text-yellow-500',
+      High: 'text-red-500',
+    },
+  };
   return (
     <div
       className={`${
